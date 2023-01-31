@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/backend/Modules/Backend/Resources/views/index.blade.php ENDPATH**/ ?>

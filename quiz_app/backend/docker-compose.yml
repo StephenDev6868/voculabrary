@@ -1,0 +1,80 @@
+version: '3'
+services:
+
+  #PHP Service
+  quizapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    container_name: quiz_app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: quiz_app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/quiz_app
+    volumes:
+      - ./:/var/www/quiz_app
+      - ./Dockerfiles/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: nginx_quiz_app_webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8088:80"
+      - "444:443"
+    volumes:
+      - ./:/var/www/quiz_app
+      - ./Dockerfiles/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MySQL Service
+  mysql:
+    image: mysql:5.7.32
+    container_name: db_quiz_app
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: quiz_app
+      MYSQL_ROOT_PASSWORD: quizapp!23@xyz*
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./Dockerfiles/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+#phpmyadmin
+  phpmyadmin:
+      image: phpmyadmin:5.1.0-apache
+      container_name: phpmyadmin_quiz_app
+      restart: unless-stopped
+      ports:
+          - 8080:8080
+      environment:
+          PMA_HOST: db_quiz_app
+          PMA_PORT: 3306
+          PMA_USER: root
+          PMA_PASSWORD: quizapp!23@xyz*
+      networks:
+          - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
