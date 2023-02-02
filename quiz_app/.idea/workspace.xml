@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bd176f2-3fa1-484e-b1de-d13f842851ee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docker/mysql/docker-entrypoint-initdb.d/quiz_app.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env.example" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,7 +322,7 @@
       <updated>1675223841832</updated>
       <workItem from="1675223843003" duration="632000" />
       <workItem from="1675227355132" duration="4544000" />
-      <workItem from="1675240744821" duration="11249000" />
+      <workItem from="1675240744821" duration="11867000" />
     </task>
     <servers />
   </component>
