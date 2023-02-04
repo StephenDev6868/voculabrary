@@ -1,19 +1,22 @@
 # Docs: https://caddyserver.com/docs/caddyfile
 https://ve3000.top {
     root * /var/www/backend/public
-
-    php_fastcgi php-fpm:9000 {
-        index index.php
-        connect_timeout 1800s
-        read_timeout 1800s
-        send_timeout 1800s
-    }
-
-    rewrite {path} {path}/ /index.php?{query}
-
-    file_server
+    php_fastcgi 127.0.0.1:9000
 
     encode gzip
+    file_server
+    #php_fastcgi php-fpm:9000 {
+    #    index index.php
+    #    connect_timeout 1800s
+    #    read_timeout 1800s
+    #    send_timeout 1800s
+    #}
 
-    # tls internal
+    #rewrite {path} {path}/ /index.php?{query}
+
+    #file_server
+
+    #encode gzip
+
+    ## tls internal
 }
